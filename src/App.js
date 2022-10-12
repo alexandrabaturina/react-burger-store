@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components"
 import { NavBar } from "./Components/NavBar"
+import { Menu } from "./Components/Menu"
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -46,13 +47,23 @@ const GlobalStyle = createGlobalStyle`
     max-width: 100%;
     height: auto;
   }
+
+  button {
+    cursor: pointer;
+  }
+
+  input,
+  button {
+    font-family: inherit;
+  }
 `
 
 const App = () => (
-  <>
-    <GlobalStyle />
-    <NavBar />
-  </>
+	<>
+		<GlobalStyle />
+		<NavBar />
+		<Menu />
+	</>
 )
 
 export default App
