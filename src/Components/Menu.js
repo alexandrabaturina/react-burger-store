@@ -1,17 +1,10 @@
 import styled from "styled-components"
 import dbMenu from "./DBMenu"
 import { ListItem } from "./ListItem"
-
-const MenuBanner = styled.div`
-	background-image: url("/menu/banner.png");
-	background-size: cover;
-	width: 100%;
-	height: 250px;
-`
+import { Banner } from "./Banner"
 
 const MenuStyled = styled.main`
 	background-color: #ccc;
-	margin-top: 80px;
 `
 
 const SectionMenu = styled.section`
@@ -20,7 +13,7 @@ const SectionMenu = styled.section`
 
 export const Menu = () => (
 	<>
-		<MenuBanner />
+		<Banner />
 		<MenuStyled>
 			<SectionMenu>
 				<h2>Burgers</h2>
