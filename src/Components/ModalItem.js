@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { CheckoutButton } from "./CheckoutButton"
 
 const Overlay = styled.div`
 	position: fixed;
@@ -25,7 +26,22 @@ const ModalBanner = styled.div`
 	background-image: url(${({ img }) => img});
 	background-size: cover;
 	background-position: center;
-	margin-bottom: 20px;
+`
+
+const Content = styled.section`
+	padding: 30px;
+	height: calc(100% - 200px);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`
+
+const ContentHeader = styled.div`
+	display: flex;
+	justify-content: space-between;
+	font-size: 24px;
+	font-weight: 700;
+	font-family: "Pacifico", cursive;
 `
 
 export const ModalItem = ({ openItem, setOpenItem }) => {
@@ -40,7 +56,18 @@ export const ModalItem = ({ openItem, setOpenItem }) => {
 		<Overlay id="overlay" onClick={closeModal}>
 			<Modal>
 				<ModalBanner img={openItem.img} />
-				{openItem.name}
+				<Content>
+					<ContentHeader>
+						<div>{openItem.name}</div>
+						<div>
+							{openItem.price.toLocaleString("en-US", {
+								style: "currency",
+								currency: "USD",
+							})}
+						</div>
+					</ContentHeader>
+					<CheckoutButton>Add</CheckoutButton>
+				</Content>
 			</Modal>
 		</Overlay>
 	)
