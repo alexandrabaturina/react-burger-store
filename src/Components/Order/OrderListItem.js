@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
+import { totalPriceItems } from "../Modal/ModalItem"
 
 const OrderItemStyled = styled.li`
 	display: flex;
@@ -23,9 +24,9 @@ export const OrderListItem = ({ order }) => {
 	return (
 		<OrderItemStyled>
 			<ItemName>{order.name}</ItemName>
-			<span>2</span>
+			<span>{order.count}</span>
 			<ItemPrice>
-				{order.price.toLocaleString("en-US", {
+				{totalPriceItems(order).toLocaleString("en-US", {
 					style: "currency",
 					currency: "USD",
 				})}
