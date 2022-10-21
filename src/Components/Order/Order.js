@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { CheckoutButton } from "../Style/CheckoutButton"
 import { OrderListItem } from "./OrderListItem"
+import { totalPriceItems } from "../Modal/ModalItem"
 
 const OrderStyled = styled.section`
 	position: fixed;
@@ -37,6 +38,7 @@ const OrderTotal = styled.div`
 	}
 	& span:last-child {
 		min-width: 75px;
+		margin-left: 20px;
 		text-align: right;
 	}
 `
@@ -46,6 +48,10 @@ const EmptyList = styled.p`
 `
 
 export const Order = ({ orders }) => {
+	const total = orders.reduce(
+		(result, order) => totalPriceItems(order) + result,
+		0
+	)
 	return (
 		<OrderStyled>
 			<OrderHeader>My Order</OrderHeader>
@@ -63,7 +69,12 @@ export const Order = ({ orders }) => {
 			<OrderTotal>
 				<span>Total</span>
 				<span>5</span>
-				<span>$35</span>
+				<span>
+					{total.toLocaleString("en-US", {
+						style: "currency",
+						currency: "USD",
+					})}
+				</span>
 			</OrderTotal>
 			<CheckoutButton>Checkout</CheckoutButton>
 		</OrderStyled>
