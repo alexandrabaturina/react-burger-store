@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { CheckoutButton } from "./CheckoutButton"
+import { CheckoutButton } from "../Style/CheckoutButton"
 import { OrderListItem } from "./OrderListItem"
 
 const OrderStyled = styled.section`

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import logoImg from "../img/logo.svg"
+import logoImg from "../../img/logo.svg"
 
 const NavBarStyled = styled.header`
 	position: fixed;
