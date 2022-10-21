@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { CheckoutButton } from "../Style/CheckoutButton"
+import { CountItem } from "./CountItem"
+import { useCount } from "../Hooks/useCount"
 
 const Overlay = styled.div`
 	position: fixed;
@@ -44,7 +46,15 @@ const ContentHeader = styled.div`
 	font-family: "Pacifico", cursive;
 `
 
+const TotalPriceItem = styled.div`
+	display: flex;
+	justify-content: space-between;
+`
+export const totalPriceItems = ({ price, count }) => price * count
+
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
+	const counter = useCount()
+
 	function closeModal(e) {
 		if (e.target.id === "overlay") {
 			setOpenItem(null)
@@ -53,6 +63,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 
 	const order = {
 		...openItem,
+		count: counter.count,
 	}
 
 	const addToOrder = () => {
@@ -74,6 +85,16 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 							})}
 						</div>
 					</ContentHeader>
+					<CountItem {...counter} />
+					<TotalPriceItem>
+						<span>Price</span>
+						<span>
+							{totalPriceItems(order).toLocaleString("en-US", {
+								style: "currency",
+								currency: "USD",
+							})}
+						</span>
+					</TotalPriceItem>
 					<CheckoutButton onClick={addToOrder}>Add</CheckoutButton>
 				</Content>
 			</Modal>
