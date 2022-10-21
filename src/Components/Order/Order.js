@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { CheckoutButton } from "../Style/CheckoutButton"
 import { OrderListItem } from "./OrderListItem"
-import { totalPriceItems } from "../Modal/ModalItem"
+import { totalPriceItems } from "../../Utils/helperFunctions"
 
 const OrderStyled = styled.section`
 	position: fixed;

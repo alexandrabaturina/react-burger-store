@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { CheckoutButton } from "../Style/CheckoutButton"
 import { CountItem } from "./CountItem"
 import { useCount } from "../Hooks/useCount"
+import { totalPriceItems } from "../../Utils/helperFunctions"
 
 const Overlay = styled.div`
 	position: fixed;
@@ -50,8 +51,6 @@ const TotalPriceItem = styled.div`
 	display: flex;
 	justify-content: space-between;
 `
-export const totalPriceItems = ({ price, count }) => price * count
-
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 	const counter = useCount()
 

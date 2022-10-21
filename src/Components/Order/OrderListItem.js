@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
-import { totalPriceItems } from "../Modal/ModalItem"
+import { totalPriceItems } from "../../Utils/helperFunctions"
 
 const OrderItemStyled = styled.li`
 	display: flex;
