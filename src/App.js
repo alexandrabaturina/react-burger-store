@@ -4,17 +4,19 @@ import { Menu } from "./Components/Menu"
 import { ModalItem } from "./Components/ModalItem"
 import { useOpenItem } from "./Components/Hooks/useOpenItem"
 import { Order } from "./Components/Order"
+import { useOrders } from "./Components/Hooks/useOrders"
 
 const App = () => {
 	const openItem = useOpenItem()
+	const orders = useOrders()
 
 	return (
 		<>
 			<GlobalStyle />
 			<NavBar />
-			<Order />
+			<Order {...orders} />
 			<Menu {...openItem} />
-			{openItem.openItem && <ModalItem {...openItem} />}
+			{openItem.openItem && <ModalItem {...openItem} {...orders} />}
 		</>
 	)
 }
