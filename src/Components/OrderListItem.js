@@ -12,19 +12,24 @@ const ItemName = styled.span`
 	flex-grow: 1;
 `
 
-const ItemTotalPrice = styled.span`
+const ItemPrice = styled.span`
 	margin-left: 20px;
 	margin-right: 10px;
 	min-width: 65px;
 	text-align: right;
 `
 
-export const OrderListItem = () => {
+export const OrderListItem = ({ order }) => {
 	return (
 		<OrderItemStyled>
-			<ItemName>JS Burger</ItemName>
+			<ItemName>{order.name}</ItemName>
 			<span>2</span>
-			<ItemTotalPrice>$10</ItemTotalPrice>
+			<ItemPrice>
+				{order.price.toLocaleString("en-US", {
+					style: "currency",
+					currency: "USD",
+				})}
+			</ItemPrice>
 			<FontAwesomeIcon icon={faTrashCan} />
 		</OrderItemStyled>
 	)

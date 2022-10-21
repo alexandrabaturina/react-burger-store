@@ -41,16 +41,24 @@ const OrderTotal = styled.div`
 	}
 `
 
-export const Order = () => {
+const EmptyList = styled.p`
+	text-align: center;
+`
+
+export const Order = ({ orders }) => {
 	return (
 		<OrderStyled>
 			<OrderHeader>My Order</OrderHeader>
 			<OrderContent>
-				<OrderList>
-					<OrderListItem />
-					<OrderListItem />
-					<OrderListItem />
-				</OrderList>
+				{orders.length ? (
+					<OrderList>
+						{orders.map((order) => (
+							<OrderListItem order={order} />
+						))}
+					</OrderList>
+				) : (
+					<EmptyList>You don't have orders yet.</EmptyList>
+				)}
 			</OrderContent>
 			<OrderTotal>
 				<span>Total</span>
