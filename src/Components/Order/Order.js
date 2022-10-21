@@ -59,7 +59,7 @@ export const Order = ({ orders }) => {
 				{orders.length ? (
 					<OrderList>
 						{orders.map((order) => (
-							<OrderListItem order={order} />
+							<OrderListItem order={order} key={order.name} />
 						))}
 					</OrderList>
 				) : (
