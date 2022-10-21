@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { CheckoutButton } from "../Style/CheckoutButton"
 import { OrderListItem } from "./OrderListItem"
-import { totalPriceItems } from "../../Utils/helperFunctions"
+import { totalPriceItems, formatPrice } from "../../Utils/helperFunctions"
 
 const OrderStyled = styled.section`
 	position: fixed;
@@ -69,12 +69,7 @@ export const Order = ({ orders }) => {
 			<OrderTotal>
 				<span>Total</span>
 				<span>5</span>
-				<span>
-					{total.toLocaleString("en-US", {
-						style: "currency",
-						currency: "USD",
-					})}
-				</span>
+				<span>{formatPrice(total)}</span>
 			</OrderTotal>
 			<CheckoutButton>Checkout</CheckoutButton>
 		</OrderStyled>

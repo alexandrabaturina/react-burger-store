@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { CheckoutButton } from "../Style/CheckoutButton"
 import { CountItem } from "./CountItem"
 import { useCount } from "../Hooks/useCount"
-import { totalPriceItems } from "../../Utils/helperFunctions"
+import { totalPriceItems, formatPrice } from "../../Utils/helperFunctions"
 
 const Overlay = styled.div`
 	position: fixed;
@@ -77,22 +77,12 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 				<Content>
 					<ContentHeader>
 						<div>{openItem.name}</div>
-						<div>
-							{openItem.price.toLocaleString("en-US", {
-								style: "currency",
-								currency: "USD",
-							})}
-						</div>
+						<div>{formatPrice(openItem.price)}</div>
 					</ContentHeader>
 					<CountItem {...counter} />
 					<TotalPriceItem>
 						<span>Price</span>
-						<span>
-							{totalPriceItems(order).toLocaleString("en-US", {
-								style: "currency",
-								currency: "USD",
-							})}
-						</span>
+						<span>{formatPrice(totalPriceItems(order))}</span>
 					</TotalPriceItem>
 					<CheckoutButton onClick={addToOrder}>Add</CheckoutButton>
 				</Content>

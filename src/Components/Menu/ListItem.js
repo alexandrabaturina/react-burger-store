@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { formatPrice } from "../../Utils/helperFunctions"
 
 const List = styled.ul`
 	display: flex;
@@ -44,12 +45,7 @@ export const ListItem = ({ itemList, setOpenItem }) => (
 		{itemList.map((item) => (
 			<Item key={item.id} img={item.img} onClick={() => setOpenItem(item)}>
 				<p>{item.name}</p>
-				<p>
-					{item.price.toLocaleString("en-US", {
-						style: "currency",
-						currency: "USD",
-					})}
-				</p>
+				<p>{formatPrice(item.price)}</p>
 			</Item>
 		))}
 	</List>
