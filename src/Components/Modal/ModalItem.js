@@ -3,6 +3,8 @@ import { CheckoutButton } from "../Style/CheckoutButton"
 import { CountItem } from "./CountItem"
 import { useCount } from "../Hooks/useCount"
 import { totalPriceItems, formatPrice } from "../../Utils/helperFunctions"
+import { Toppings } from "./Toppings"
+import { useToppings } from "../Hooks/useTopping"
 
 const Overlay = styled.div`
 	position: fixed;
@@ -53,6 +55,7 @@ const TotalPriceItem = styled.div`
 `
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 	const counter = useCount()
+	const toppings = useToppings(openItem)
 
 	function closeModal(e) {
 		if (e.target.id === "overlay") {
@@ -63,6 +66,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 	const order = {
 		...openItem,
 		count: counter.count,
+		topping: toppings.toppings,
 	}
 
 	const addToOrder = () => {
@@ -80,6 +84,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 						<div>{formatPrice(openItem.price)}</div>
 					</ContentHeader>
 					<CountItem {...counter} />
+					{openItem.toppings && <Toppings {...toppings} />}
 					<TotalPriceItem>
 						<span>Price</span>
 						<span>{formatPrice(totalPriceItems(order))}</span>
