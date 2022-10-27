@@ -18,4 +18,9 @@ export const CheckoutButton = styled.button`
 		color: #998f07;
 		border-color: #998f07;
 	}
+	&:disabled {
+		color: #bbb;
+		background-color: #ccc;
+		border-color: #aaa;
+	}
 `
