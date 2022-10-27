@@ -5,6 +5,7 @@ import { totalPriceItems, formatPrice } from "../../Utils/helperFunctions"
 
 const OrderItemStyled = styled.li`
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	margin: 15px 0;
 `
@@ -20,13 +21,25 @@ const ItemPrice = styled.span`
 	text-align: right;
 `
 
+const Toppings = styled.div`
+	color: 9a9a9a;
+	font-size: 14px;
+	width: 100%;
+`
+
 export const OrderListItem = ({ order }) => {
+	const toppings = order.topping
+		.filter((topping) => topping.checked === true)
+		.map((topping) => topping.name)
+		.join(", ")
+	console.log(toppings)
 	return (
 		<OrderItemStyled>
 			<ItemName>{order.name}</ItemName>
 			<span>{order.count}</span>
 			<ItemPrice>{formatPrice(totalPriceItems(order))}</ItemPrice>
 			<FontAwesomeIcon icon={faTrashCan} />
+			<Toppings>{toppings}</Toppings>
 		</OrderItemStyled>
 	)
 }
