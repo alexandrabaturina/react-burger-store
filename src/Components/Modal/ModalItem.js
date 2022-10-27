@@ -4,7 +4,9 @@ import { CountItem } from "./CountItem"
 import { useCount } from "../Hooks/useCount"
 import { totalPriceItems, formatPrice } from "../../Utils/helperFunctions"
 import { Toppings } from "./Toppings"
+import { Choices } from "./Choices"
 import { useToppings } from "../Hooks/useTopping"
+import { useChoices } from "../Hooks/useChoices"
 
 const Overlay = styled.div`
 	position: fixed;
@@ -56,8 +58,9 @@ const TotalPriceItem = styled.div`
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 	const counter = useCount()
 	const toppings = useToppings(openItem)
+	const choices = useChoices(openItem)
 
-	function closeModal(e) {
+	const closeModal = (e) => {
 		if (e.target.id === "overlay") {
 			setOpenItem(null)
 		}
@@ -67,6 +70,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 		...openItem,
 		count: counter.count,
 		topping: toppings.toppings,
+		choice: choices.choice,
 	}
 
 	const addToOrder = () => {
@@ -85,11 +89,17 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 					</ContentHeader>
 					<CountItem {...counter} />
 					{openItem.toppings && <Toppings {...toppings} />}
+					{openItem.choices && <Choices {...choices} openItem={openItem} />}
 					<TotalPriceItem>
 						<span>Price</span>
 						<span>{formatPrice(totalPriceItems(order))}</span>
 					</TotalPriceItem>
-					<CheckoutButton onClick={addToOrder}>Add</CheckoutButton>
+					<CheckoutButton
+						onClick={addToOrder}
+						disabled={order.choices && !order.choice}
+					>
+						Add
+					</CheckoutButton>
 				</Content>
 			</Modal>
 		</Overlay>
