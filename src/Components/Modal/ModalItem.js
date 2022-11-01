@@ -83,6 +83,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 		const newOrders = [...orders]
 		newOrders[openItem.index] = order
 		setOrders(newOrders)
+		setOpenItem(null)
 	}
 
 	return (
@@ -105,7 +106,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 						onClick={isEdited ? editOrder : addToOrder}
 						disabled={order.choices && !order.choice}
 					>
-						Add
+						{isEdited ? "Edit" : "Add"}
 					</CheckoutButton>
 				</Content>
 			</Modal>
