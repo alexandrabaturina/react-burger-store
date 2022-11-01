@@ -27,14 +27,14 @@ const Toppings = styled.div`
 	width: 100%;
 `
 
-export const OrderListItem = ({ order, index, deleteItem }) => {
+export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
 	const toppings = order.topping
 		.filter((topping) => topping.checked === true)
 		.map((topping) => topping.name)
 		.join(", ")
 
 	return (
-		<OrderItemStyled>
+		<OrderItemStyled onClick={() => setOpenItem({ ...order, index })}>
 			<ItemName>
 				{order.name}
 				{order.choice}

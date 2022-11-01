@@ -47,7 +47,7 @@ const EmptyList = styled.p`
 	text-align: center;
 `
 
-export const Order = ({ orders, setOrders }) => {
+export const Order = ({ orders, setOrders, setOpenItem }) => {
 	const deleteItem = (index) => {
 		const newOrder = orders.filter((item, i) => index !== i)
 		setOrders(newOrder)
@@ -69,6 +69,7 @@ export const Order = ({ orders, setOrders }) => {
 								key={index}
 								deleteItem={deleteItem}
 								index={index}
+								setOpenItem={setOpenItem}
 							/>
 						))}
 					</OrderList>

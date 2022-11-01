@@ -56,9 +56,10 @@ const TotalPriceItem = styled.div`
 	justify-content: space-between;
 `
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
-	const counter = useCount()
+	const counter = useCount(openItem.count)
 	const toppings = useToppings(openItem)
 	const choices = useChoices(openItem)
+	const isEdited = openItem.index > -1
 
 	const closeModal = (e) => {
 		if (e.target.id === "overlay") {
@@ -78,6 +79,12 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 		setOpenItem(null)
 	}
 
+	const editOrder = () => {
+		const newOrders = [...orders]
+		newOrders[openItem.index] = order
+		setOrders(newOrders)
+	}
+
 	return (
 		<Overlay id="overlay" onClick={closeModal}>
 			<Modal>
@@ -95,7 +102,7 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
 						<span>{formatPrice(totalPriceItems(order))}</span>
 					</TotalPriceItem>
 					<CheckoutButton
-						onClick={addToOrder}
+						onClick={isEdited ? editOrder : addToOrder}
 						disabled={order.choices && !order.choice}
 					>
 						Add
