@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons"
 import { totalPriceItems, formatPrice } from "../../Utils/helperFunctions"
+import { useRef } from "react"
 
 const OrderItemStyled = styled.li`
 	display: flex;
@@ -33,15 +34,25 @@ export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
 		.map((topping) => topping.name)
 		.join(", ")
 
+	const refDeleteButton = useRef(null)
+
 	return (
-		<OrderItemStyled onClick={() => setOpenItem({ ...order, index })}>
+		<OrderItemStyled
+			onClick={(e) =>
+				e.target !== refDeleteButton.current && setOpenItem({ ...order, index })
+			}
+		>
 			<ItemName>
 				{order.name}
 				{order.choice}
 			</ItemName>
 			<span>{order.count}</span>
 			<ItemPrice>{formatPrice(totalPriceItems(order))}</ItemPrice>
-			<FontAwesomeIcon icon={faTrashCan} onClick={() => deleteItem(index)} />
+			<FontAwesomeIcon
+				icon={faTrashCan}
+				ref={refDeleteButton}
+				onClick={() => deleteItem(index)}
+			/>
 			<Toppings>{toppings}</Toppings>
 		</OrderItemStyled>
 	)
